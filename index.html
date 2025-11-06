@@ -1,399 +1,105 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<     <!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio da Jeniffer 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Portfolio</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+body {
+    font-family: 'Poppins sans-seri'f;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    header {
+      background-color: #7c1ab1;
+      color: #c6bfbf;
+      padding: 2rem 0;
+    }
 
-        body {
-            background: linear-gradient(135deg, #7b2ff7, #f107a3);
-            color: white;
-            text-align: center;
-            transition: background 0.5s, color 0.5s;
-        }
+    h1 {
+      margin: 0;
+    }
 
-        /* ===== MODO CLARO ===== */
-        body.light {
-            background: linear-gradient(135deg, #ffe97f, #ff8fcf);
-            color: #333;
-        }
+    .buttons {
+      margin-top: 1.5rem;
+    }
 
-        /* ===== MENU ===== */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            z-index: 10;
-            transition: background 0.5s;
-        }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        body.light header {
-            background: rgba(255, 255, 255, 0.6);
-        }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        header h1 {
-            font-size: 1.5rem;
-            color: #ffe97f;
-        }
+    section {
+      display: none;
+      padding: 2rem;
+    }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+    section.active {
+      display: block;
+    }
 
-        body.light nav a {
-            color: #333;
-        }
+    footer {
+      background-color: #5f4d9a;
+      color: white;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .img{
+          width: 150px; 
+  height: 150px;
+  border-radius: 50%;
+    }
 
-        nav a:hover {
-            color: #ffe97f;
-        }
-
-        /* ===== BOTÃO DE TEMA ===== */
-        #modoTema {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        body.light #modoTema {
-            color: #333;
-        }
-
-        #modoTema:hover {
-            transform: scale(1.2);
-        }
-
-        section {
-            margin: 6rem auto;
-            width: 90%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: background 0.5s;
-        }
-
-        body.light section {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        #perfil img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 4px solid #ffe97f;
-            margin-bottom: 1rem;
-            object-fit: cover;
-        }
-
-        h2 {
-            color: #ffe97f;
-            margin-bottom: 1rem;
-        }
-
-        body.light h2 {
-            color: #f107a3;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 1rem;
-            width: 230px;
-            transition: transform 0.3s, background 0.5s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        body.light .card {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .card h3 {
-            color: #ffe97f;
-            margin-bottom: 0.5rem;
-        }
-
-        body.light .card h3 {
-            color: #f107a3;
-        }
-
-        /* ===== JOGO ===== */
-        canvas {
-            border: 3px solid #fff;
-            background: #111;
-            border-radius: 8px;
-        }
-
-        #placar {
-            margin-top: 10px;
-            font-size: 1.1rem;
-        }
-
-        #reiniciar {
-            margin-top: 15px;
-            background: #ffe97f;
-            border: none;
-            color: #222;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        #reiniciar:hover {
-            background: #fff;
-            color: #7b2ff7;
-        }
-
-        /* ===== RODAPÉ ===== */
-        footer {
-            margin-top: 3rem;
-            padding: 1rem;
-            width: 100%;
-            background: rgba(0,0,0,0.3);
-            color: #fff;
-            transition: background 0.5s, color 0.5s;
-        }
-
-        body.light footer {
-            background: rgba(255, 255, 255, 0.6);
-            color: #333;
-        }
-
-        footer a {
-            color: #ffe97f;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        body.light footer a {
-            color: #f107a3;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .cards {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Meu Portfólio</h1>
+    <p>Desenvolvedor Web | Designer | Criador de Soluções</p>
+<img src="" alt="foto de perfil" class="img"> 
+    <div class="buttons">
+    </div>
+  </header>
 
-    <!-- ===== CABEÇALHO ===== -->
-    <header>
-        <h1>Jeniffer 💖</h1>
-        <nav>
-            <a href="#perfil">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#jogo">Jogo</a>
-        </nav>
-        <button id="modoTema" title="Alternar tema">🌙</button>
-    </header>
+  <main>
+    <section id="sobre" class="active">
+      <h1>Sobre Mim</h1>
+      <p>Olá, bem vindo ao meu Portfólio
+Me chamo Jeniffer b, tenho 16 anos e sou estudante de Desenvolvimento Web e Cyber Segurança.
+Atualmente estou cursando o 1º ano do Ensino Médio Técnico, pela Escola do Futuro Raul Brandão de Castro,
+onde desenvolvo páginas web na disciplina de Front End.
+</p><br>
+<h2>Projetos</h2>
+ <p>Dentre meus projetos, destaco:<br>
+        - Criação e desenvolvimento de página de compra e venda de frutas e verduras;<br>
 
-    <!-- ===== PERFIL ===== -->
-    <section id="perfil">
-        <img src="https://i.pinimg.com/736x/b7/f3/36/b7f33686b7c80a0e7481e41b1e8cde84.jpg" alt="Foto da Jeniffer">
-        <h2>Oi! Eu sou a Jeniffer 👋</h2>
-        <p>Tenho <strong>16 anos</strong> e sou uma garota sonhadora, criativa e apaixonada por futebol ⚽✨</p>
+        - desenvolvimento de paginas de Login e Cadastro <br>
+
+        - desenvolvimento de paginas de Segurança de app <br>
+
+        -PROJETO: Desenvolvimento de um site completo para uma empresa de tecnologia, incluindo páginas de produtos, serviços e contato.<br>
+    </p>
+<br>
+<H1>Contato</H1>
+<img src="https://freelogopng.com/images/all_img/1658587303instagram-png.png" alt="" width="30">
+    <a href="www.instagram.com/Jeniffer">@_cacheada_064_</a> <br>
+    <a href="www.wpp.com"></a>
     </section>
-
-    <!-- ===== SOBRE ===== -->
-    <section id="sobre">
-        <h2>🌸 Sobre mim</h2>
-        <p>
-            Eu sou a <strong>Jeniffer</strong>, tenho 16 anos e sonho em ser <strong>jogadora de futebol profissional</strong>!  
-            Amo tecnologia, arte e desafios — acredito que posso conquistar tudo o que eu quiser com esforço e paixão 💫
-        </p>
-    </section>
-
-    <!-- ===== PROJETOS ===== -->
-    <section id="projetos">
-        <h2>💻 Meus Projetos</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>🌷 Meu Portfólio</h3>
-                <p>Um site criado por mim com ajuda do ChatGPT, mostrando quem eu sou e meus sonhos ✨</p>
-            </div>
-            <div class="card">
-                <h3>🐍 Jogo da Cobrinha</h3>
-                <p>Um joguinho divertido com placar e recorde, feito com JavaScript!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== JOGO ===== -->
-    <section id="jogo">
-        <h2>🐍 Joguinho da Cobrinha</h2>
-        <canvas id="snake" width="400" height="400"></canvas>
-        <div id="placar">
-            <p>Pontuação: <span id="score">0</span> | Recorde: <span id="highscore">0</span></p>
-        </div>
-        <button id="reiniciar">🔁 Reiniciar Jogo</button>
-        <p style="margin-top:10px;">Use as setas do teclado para jogar!</p>
-    </section>
-
-    <!-- ===== RODAPÉ ===== -->
-    <footer>
-        <p>Feito com 💖 por Jeniffer — 2025</p>
-        <p>Me siga no Instagram:  
-            <a href="https://www.instagram.com/_cacheada_064_/" target="_blank">@_cacheada_064_</a>
-        </p>
-    </footer>
-
-    <!-- ===== SCRIPT DO JOGO E TEMA ===== -->
-    <script>
-        // ======= JOGO DA COBRINHA =======
-        const canvas = document.getElementById("snake");
-        const ctx = canvas.getContext("2d");
-        const box = 20;
-        let snake, direction, food, score, game;
-        let highScore = localStorage.getItem("highscore") || 0;
-        document.getElementById("highscore").textContent = highScore;
-
-        function iniciarJogo() {
-            snake = [{ x: 9 * box, y: 10 * box }];
-            direction = null;
-            food = {
-                x: Math.floor(Math.random() * 19 + 1) * box,
-                y: Math.floor(Math.random() * 19 + 1) * box
-            };
-            score = 0;
-            document.getElementById("score").textContent = score;
-            clearInterval(game);
-            game = setInterval(draw, 120);
-        }
-
-        document.addEventListener("keydown", event => {
-            if (event.keyCode == 37 && direction != "RIGHT") direction = "LEFT";
-            else if (event.keyCode == 38 && direction != "DOWN") direction = "UP";
-            else if (event.keyCode == 39 && direction != "LEFT") direction = "RIGHT";
-            else if (event.keyCode == 40 && direction != "UP") direction = "DOWN";
-        });
-
-        function draw() {
-            ctx.fillStyle = "#111";
-            ctx.fillRect(0, 0, 400, 400);
-
-            for (let i = 0; i < snake.length; i++) {
-                ctx.fillStyle = i == 0 ? "#7b2ff7" : "#f107a3";
-                ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                ctx.strokeStyle = "#fff";
-                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-            }
-
-            ctx.fillStyle = "#ffe97f";
-            ctx.fillRect(food.x, food.y, box, box);
-
-            let snakeX = snake[0].x;
-            let snakeY = snake[0].y;
-
-            if (direction == "LEFT") snakeX -= box;
-            if (direction == "UP") snakeY -= box;
-            if (direction == "RIGHT") snakeX += box;
-            if (direction == "DOWN") snakeY += box;
-
-            if (snakeX == food.x && snakeY == food.y) {
-                score++;
-                document.getElementById("score").textContent = score;
-                food = {
-                    x: Math.floor(Math.random() * 19 + 1) * box,
-                    y: Math.floor(Math.random() * 19 + 1) * box
-                };
-            } else {
-                snake.pop();
-            }
-
-            const newHead = { x: snakeX, y: snakeY };
-
-            if (
-                snakeX < 0 ||
-                snakeY < 0 ||
-                snakeX >= 400 ||
-                snakeY >= 400 ||
-                collision(newHead, snake)
-            ) {
-                clearInterval(game);
-                ctx.fillStyle = "#fff";
-                ctx.font = "25px Poppins";
-                ctx.fillText("💀 Fim de jogo!", 120, 200);
-                ctx.fillText("Pontuação: " + score, 130, 240);
-
-                if (score > highScore) {
-                    highScore = score;
-                    localStorage.setItem("highscore", highScore);
-                }
-                document.getElementById("highscore").textContent = highScore;
-                return;
-            }
-
-            snake.unshift(newHead);
-        }
-
-        function collision(head, array) {
-            return array.some(segment => head.x === segment.x && head.y === segment.y);
-        }
-
-        document.getElementById("reiniciar").addEventListener("click", iniciarJogo);
-        iniciarJogo();
-
-        // ======= MODO CLARO/ESCURO =======
-        const botaoTema = document.getElementById("modoTema");
-        botaoTema.addEventListener("click", () => {
-            document.body.classList.toggle("light");
-            botaoTema.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
-        });
-    </script>
+    <section id="contato">
+      <h2>Contato</h2>
 </body>
 </html>
