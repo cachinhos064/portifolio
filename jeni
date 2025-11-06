@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio da Jeniffer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #7b2ff7, #f107a3);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        section {
+            margin-top: 2rem;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        #sobre {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        #sobre h2 {
+            color: #ffe97f;
+            margin-bottom: 1rem;
+        }
+
+        #jogo {
+            margin-top: 2.5rem;
+        }
+
+        canvas {
+            border: 3px solid #fff;
+            background: #111;
+            border-radius: 8px;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 1rem;
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎀 Portfólio da Jeniffer 🎀</h1>
+    </header>
+
+    <section id="sobre">
+        <h2>🌸 Sobre mim</h2>
+        <p>Oi! Eu sou <strong>Jeniffer</strong>, tenho <strong>16 anos</strong> e adoro aprender sobre tecnologia, design e programação! 💻✨</p>
+        <p>Aqui no meu portfólio, você pode conhecer um pouco sobre mim e jogar um joguinho divertido 🎮</p>
+    </section>
+
+    <section id="jogo">
+        <h2>🐍 Joguinho da Cobrinha</h2>
+        <canvas id="snake" width="400" height="400"></canvas>
+        <p style="margin-top:10px;">Use as setas do teclado para jogar!</p>
+    </section>
+
+    <footer>
+        <p>Feito com 💖 por Jeniffer - 2025</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("snake");
+        const ctx = canvas.getContext("2d");
+
+        const box = 20;
+        let snake = [{ x: 9 * box, y: 10 * box }];
+        let direction;
+        let food = {
+            x: Math.floor(Math.random() * 19 + 1) * box,
+            y: Math.floor(Math.random() * 19 + 1) * box
+        };
+        let score = 0;
+
+        document.addEventListener("keydown", directionHandler);
+
+        function directionHandler(event) {
+            if (event.keyCode == 37 && direction != "RIGHT") direction = "LEFT";
+            else if (event.keyCode == 38 && direction != "DOWN") direction = "UP";
+            else if (event.keyCode == 39 && direction != "LEFT") direction = "RIGHT";
+            else if (event.keyCode == 40 && direction != "UP") direction = "DOWN";
+        }
+
+        function draw() {
+            ctx.fillStyle = "#111";
+            ctx.fillRect(0, 0, 400, 400);
+
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillStyle = i == 0 ? "#7b2ff7" : "#f107a3";
+                ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                ctx.strokeStyle = "#fff";
+                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+            }
+
+            ctx.fillStyle = "#ffe97f";
+            ctx.fillRect(food.x, food.y, box, box);
+
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+
+            if (direction == "LEFT") snakeX -= box;
+            if (direction == "UP") snakeY -= box;
+            if (direction == "RIGHT") snakeX += box;
+            if (direction == "DOWN") snakeY += box;
+
+            if (snakeX == food.x && snakeY == food.y) {
+                score++;
+                food = {
+                    x: Math.floor(Math.random() * 19 + 1) * box,
+                    y: Math.floor(Math.random() * 19 + 1) * box
+                };
+            } else {
+                snake.pop();
+            }
+
+            let newHead = { x: snakeX, y: snakeY };
+
+            if (
+                snakeX < 0 ||
+                snakeY < 0 ||
+                snakeX >= 400 ||
+                snakeY >= 400 ||
+                collision(newHead, snake)
+            ) {
+                clearInterval(game);
+                ctx.fillStyle = "#fff";
+                ctx.font = "25px Poppins";
+                ctx.fillText("💀 Fim de jogo!", 120, 200);
+                ctx.fillText("Pontuação: " + score, 130, 240);
+                return;
+            }
+
+            snake.unshift(newHead);
+
+            ctx.fillStyle = "#fff";
+            ctx.font = "18px Poppins";
+            ctx.fillText("Pontuação: " + score, 10, 20);
+        }
+
+        function collision(head, array) {
+            for (let i = 0; i < array.length; i++) {
+                if (head.x == array[i].x && head.y == array[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        let game = setInterval(draw, 120);
+    </script>
+</body>
+</html>
